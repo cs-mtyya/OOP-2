@@ -42,72 +42,75 @@ Image Frame_image(Image img) {
     return img;
 
 }
-Image blackandwhiteimage(Image& image) {
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            int red = image(i, j, 0);
-            int green = image(i, j, 1);
-            int blue = image(i, j, 2);
+Image blackandwhiteimage(Image img) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            int red = img(i, j, 0);
+            int green = img(i, j, 1);
+            int blue = img(i, j, 2);
             int average = (red + green + blue) / 3;
             if (average < 127) {
-                image(i, j, 0) = 0;
-                image(i, j, 1) = 0;
-                image(i, j, 2) = 0;
+                img(i, j, 0) = 0;
+                img(i, j, 1) = 0;
+                img(i, j, 2) = 0;
             } else {
-                image(i, j, 0) = 255;
-                image(i, j, 1) = 255;
-                image(i, j, 2) = 255;
+                img(i, j, 0) = 255;
+                img(i, j, 1) = 255;
+                img(i, j, 2) = 255;
             }
         }
     }
+    return img;
 }
 
-Image rotateimage(Image& image) {
+Image rotateimage(Image img) {
+
     int angle;
     cout << "Enter the angle of rotation (90, 180, 270): ";
     cin >> angle;
     if (angle == 180) {
-        Image newImage(image.width, image.height);
-        for (int i = 0; i < image.width; i++) {
-            for (int j = 0; j < image.height; j++) {
-                int new_i = image.width - 1 - i;
-                int new_j = image.height - 1 - j;
-                newImage(new_i, new_j, 0) = image(i, j, 0);
-                newImage(new_i, new_j, 1) = image(i, j, 1);
-                newImage(new_i, new_j, 2) = image(i, j, 2);
+        Image newImage(img.width, img.height);
+        for (int i = 0; i < img.width; i++) {
+            for (int j = 0; j < img.height; j++) {
+                int new_i = img.width - 1 - i;
+                int new_j = img.height - 1 - j;
+                newImage(new_i, new_j, 0) = img(i, j, 0);
+                newImage(new_i, new_j, 1) = img(i, j, 1);
+                newImage(new_i, new_j, 2) = img(i, j, 2);
             }
         }
-        image = newImage;
+        img = newImage;
     }
     else if (angle == 90) {
-        Image newImage(image.height, image.width);
-        for (int i = 0; i < image.width; i++) {
-            for (int j = 0; j < image.height; j++) {
-                int new_i = image.height - 1 - j;
+        Image newImage(img.height, img.width);
+        for (int i = 0; i < img.width; i++) {
+            for (int j = 0; j < img.height; j++) {
+                int new_i = img.height - 1 - j;
                 int new_j = i;
-                newImage(new_i, new_j, 0) = image(i, j, 0);
-                newImage(new_i, new_j, 1) = image(i, j, 1);
-                newImage(new_i, new_j, 2) = image(i, j, 2);
+                newImage(new_i, new_j, 0) = img(i, j, 0);
+                newImage(new_i, new_j, 1) = img(i, j, 1);
+                newImage(new_i, new_j, 2) = img(i, j, 2);
             }
         }
-        image = newImage;
+        img = newImage;
     }
     else if (angle == 270) {
-        Image newImage(image.height, image.width);
-        for (int i = 0; i < image.width; i++) {
-            for (int j = 0; j < image.height; j++) {
+        Image newImage(img.height, img.width);
+        for (int i = 0; i < img.width; i++) {
+            for (int j = 0; j < img.height; j++) {
                 int new_i = j;
-                int new_j = image.width - 1 - i;
-                newImage(new_i, new_j, 0) = image(i, j, 0);
-                newImage(new_i, new_j, 1) = image(i, j, 1);
-                newImage(new_i, new_j, 2) = image(i, j, 2);
+                int new_j = img.width - 1 - i;
+                newImage(new_i, new_j, 0) = img(i, j, 0);
+                newImage(new_i, new_j, 1) = img(i, j, 1);
+                newImage(new_i, new_j, 2) = img(i, j, 2);
             }
         }
-        image = newImage;
+        img = newImage;
     }
     else {
         cout << "Invalid angle!" << endl;
     }
+    return img;
 }
 Image Grey_scale(Image img) {
 
