@@ -8,30 +8,6 @@ using namespace std;
 Image loadimage(Image img) {
     return img;
 }
-
-Image Grey_scale(Image img) {
-
-    for (int y = 0; y < img.height;y++) {
-        for (int x = 0; x < img.width; x++) {
-
-
-            int R = img.getPixel(x, y, 0);
-            int G = img.getPixel(x, y, 1);
-            int B = img.getPixel(x, y, 2);
-
-            int grey = (R + G + B) / 3;
-
-            img.setPixel(x, y, 0, grey);
-            img.setPixel(x, y, 1, grey);
-            img.setPixel(x, y, 2, grey);
-        }
-    }
-    
-    return img;
-}
-    
-
-
 Image Invert_image(Image img) {
     for (int i = 0; i<img.width ; i++) {
         for (int j=0; j<img.height ;j++) {
@@ -66,7 +42,7 @@ Image Frame_image(Image img) {
     return img;
 
 }
-void blackandwhiteimage(Image& image) {
+Image blackandwhiteimage(Image& image) {
     for (int i = 0; i < image.width; i++) {
         for (int j = 0; j < image.height; j++) {
             int red = image(i, j, 0);
@@ -86,7 +62,7 @@ void blackandwhiteimage(Image& image) {
     }
 }
 
-void rotateimage(Image& image) {
+Image rotateimage(Image& image) {
     int angle;
     cout << "Enter the angle of rotation (90, 180, 270): ";
     cin >> angle;
@@ -133,7 +109,6 @@ void rotateimage(Image& image) {
         cout << "Invalid angle!" << endl;
     }
 }
-
 Image Grey_scale(Image img) {
 
     for (int y = 0; y < img.height;y++) {
@@ -157,8 +132,8 @@ Image Grey_scale(Image img) {
 
 Image Flip_Image(Image img)
 {
-    Image newiamge(img.width, img.height);
 
+    Image newiamge(img.width, img.height);
     char choice;
     cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
     cin >> choice;
@@ -248,32 +223,32 @@ return img;
     Image Resize(Image img) {
     cout << "1- Enter new dimensions\n";
     cout << "2- Enter a ratio\n";
-    int choice;
-    cin >> choice;
+    int r;
+    cin >> r;
 
-    int newW, newH;
+    int newWidth, newHeight;
 
-    if (choice == 1) {
+    if (r == 1) {
         cout << "New width: ";
-        cin >> newW;
+        cin >> newWidth;
         cout << "New height: ";
-        cin >> newH;
+        cin >> newHeight;
     } else {
         double ratio;
         cout << "Ratio (e.g. 0.5 to reduce, 2 to increase): ";
         cin >> ratio;
-        newW = max(1, (int)round(img.width * ratio));
-        newH = max(1, (int)round(img.height * ratio));
+        newWidth = max(1, (int)round(img.width * ratio));
+        newHeight = max(1, (int)round(img.height * ratio));
     }
 
-    Image result(newW, newH);
+    Image result(newWidth, newHeight);
 
-    for (int i = 0; i < newW; i++) {
-        for (int j = 0; j < newH; j++) {
+    for (int i = 0; i < newWidth; i++) {
+        for (int j = 0; j < newHeight; j++) {
 
             
-            double srcX = (newW > 1) ? i * (double)(img.width - 1) / (newW - 1) : 0;
-            double srcY = (newH > 1) ? j * (double)(img.height - 1) / (newH - 1) : 0;
+            double srcX = (newWidth > 1) ? i * (double)(img.width - 1) / (newWidth - 1) : 0;
+            double srcY = (newHeight > 1) ? j * (double)(img.height - 1) / (newHeight - 1) : 0;
 
             int x0 = (int)srcX;
             int y0 = (int)srcY;
@@ -342,7 +317,7 @@ else if (n == 2) {
 else if (n == 3) {
     
     cout << "Converting to black and white...\n";
-    
+    img = blackandwhiteimage(img);
 }
 else if (n == 4) {
     
@@ -358,12 +333,12 @@ else if (n == 5) {
 else if (n == 6) {
    
     cout << "Flipping image...\n";
-    
+    img= Flip_Image(img);
 }
 else if (n == 7) {
     
     cout << "Rotating image...\n";
-   
+   img  =  rotateimage(img);
 }
 else if (n == 8) {
     cout << "Adjusting brightness...\n";
