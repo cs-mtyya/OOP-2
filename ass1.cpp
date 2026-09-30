@@ -264,11 +264,11 @@ return img;
             for (int c = 0; c < 3; c++) {
                 double top    = img(x0, y0, c) * (1 - dx) + img(x1, y0, c) * dx;
                 double bottom = img(x0, y1, c) * (1 - dx) + img(x1, y1, c) * dx;
-                result(i, j, c) = (unsigned char)round(top * (1 - dy) + bottom * dy);
+                img(i, j, c) = (unsigned char)round(top * (1 - dy) + bottom * dy);
             }
         }
     }
-    return result;
+    return img;
 }
 
 
