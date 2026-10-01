@@ -223,57 +223,22 @@ return img;
 }
 
 
-    Image Resize(Image img) {
-    cout << "1- Enter new dimensions\n";
-    cout << "2- Enter a ratio\n";
-    int r;
-    cin >> r;
-
-    int newWidth, newHeight;
-
-    if (r == 1) {
-        cout << "New width: ";
-        cin >> newWidth;
-        cout << "New height: ";
-        cin >> newHeight;
-    } else {
-        double ratio;
-        cout << "Ratio (e.g. 0.5 to reduce, 2 to increase): ";
-        cin >> ratio;
-        newWidth = max(1, (int)round(img.width * ratio));
-        newHeight = max(1, (int)round(img.height * ratio));
-    }
-
-    Image result(newWidth, newHeight);
-
-    for (int i = 0; i < newWidth; i++) {
-        for (int j = 0; j < newHeight; j++) {
-
-            
-            double srcX = (newWidth > 1) ? i * (double)(img.width - 1) / (newWidth - 1) : 0;
-            double srcY = (newHeight > 1) ? j * (double)(img.height - 1) / (newHeight - 1) : 0;
-
-            int x0 = (int)srcX;
-            int y0 = (int)srcY;
-            int x1 = min(x0 + 1, img.width - 1);
-            int y1 = min(y0 + 1, img.height - 1);
-
-            double dx = srcX - x0;   
-            double dy = srcY - y0;   
-
-            for (int c = 0; c < 3; c++) {
-                double top    = img(x0, y0, c) * (1 - dx) + img(x1, y0, c) * dx;
-                double bottom = img(x0, y1, c) * (1 - dx) + img(x1, y1, c) * dx;
-                img(i, j, c) = (unsigned char)round(top * (1 - dy) + bottom * dy);
+    Image resize(Image img, int width,int height) {
+        
+        Image img2(width,height);
+        double w = img.width,h = img.height;
+        double step1,step2;
+        step1 = w/width;
+        step2= h/height;
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++){
+                for (int k=0; k<3 ; k++){
+                    img2(i,j,k) = img(round(i*step1),round(j * step2),k);
+                }
             }
         }
-    }
-    return img;
+        return img2;
 }
-
-
-
-
 
 
 
@@ -351,7 +316,14 @@ else if (n == 8) {
 
 else if (n == 9) {
     cout << "resizing image...\n";
-    img = Resize(img);
+    int width,height;
+    cout<<"write dimensions\n";
+        cout<< "width\n";
+        cin>>width;
+        cout <<"height\n";
+        cin>>height;
+        img = resize(img,width ,height); 
+    
     
 }
 
