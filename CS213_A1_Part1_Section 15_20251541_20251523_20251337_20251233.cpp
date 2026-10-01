@@ -1,3 +1,12 @@
+//====================================================================================
+//======================================Part 1========================================
+//Mohamed Tamer : 20251523 |||| filter: 3, 7
+//Mohamed Assem:20251337  ||| filter: 2, 6
+//Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8
+//Abdlruhman Mohamed: 20251233 |||| filter: 1, 5
+//section: S15
+//===================================================================================
+//===================================================================================
 #include <iostream>
 using namespace std;
 #include "Image_Class.h"
@@ -16,8 +25,6 @@ Image Invert_image(Image img) {
             img (i,j,1) = 255 - img(i,j,1);
             img (i,j,2) = 255 - img(i,j,2); 
 
-
-
         }
       
     }
@@ -26,22 +33,46 @@ Image Invert_image(Image img) {
 }
 
 Image Frame_image(Image img) {
-    for (int i = 0; i<img.width ; i++) {
-        for (int j=0; j<img.height ;j++) {
-            if (i < 10 || i >= img.width - 10 ||j < 10 || j>=img.height - 10) {
+    int f;
+    cout << "Choose frame style:\n";
+    cout << "1) Simple\n";
+    cout << "2) Fancy\n";
+    cout << "Your choice: ";
+    cin >> f;
 
-            img (i,j,0) = 127;
-            img (i,j,1) = 0;
-            img (i,j,2) = 255;
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+
+            
+            int d = min(min(i, img.width - 1 - i),
+                        min(j, img.height - 1 - j));
+
+            if (f == 1) {
+                if (d < 10) {
+                    img(i, j, 0) = 255;
+                    img(i, j, 1) = 255;
+                    img(i, j, 2) = 255;
+                }
             }
-
-
+            else {
+                
+                if (d < 10) {
+                    img(i, j, 0) = 255;
+                    img(i, j, 1) = 255;
+                    img(i, j, 2) = 255;
+                }
+                else if (d >= 15 && d < 20) {
+                    img(i, j, 0) = 255;
+                    img(i, j, 1) = 255;
+                    img(i, j, 2) = 255;
+                }
+            }
         }
-      
     }
     return img;
-
 }
+
+
 Image blackandwhiteimage(Image img) {
     for (int i = 0; i < img.width; i++) {
         for (int j = 0; j < img.height; j++) {
@@ -137,10 +168,11 @@ Image Flip_Image(Image img)
 {
 
     Image newiamge(img.width, img.height);
-    char choice;
+    char flip;
     cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
-    cin >> choice;
-    if (choice=='H') {
+    cout << "Your choice: ";
+    cin >> flip;
+    if (flip=='H') {
         for (int y = 0;y < img.height;y++){
             for (int x = img.width-1; 0 <= x;x--)
             {
@@ -224,7 +256,7 @@ return img;
 
 
     Image resize(Image img, int width,int height) {
-        
+
         Image img2(width,height);
         double w = img.width,h = img.height;
         double step1,step2;
@@ -318,9 +350,9 @@ else if (n == 9) {
     cout << "resizing image...\n";
     int width,height;
     cout<<"write dimensions\n";
-        cout<< "width\n";
+        cout<< "\nwidth: ";
         cin>>width;
-        cout <<"height\n";
+        cout <<"\nheight: ";
         cin>>height;
         img = resize(img,width ,height); 
     
