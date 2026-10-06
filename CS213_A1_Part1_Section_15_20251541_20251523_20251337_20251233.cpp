@@ -547,6 +547,7 @@ else if (n == 21) {
     
     cout << "\t 1. save before exit\n";
     cout<< "\t 2.discard\n";
+    cout<<"\n Enter choice: \n";
     cin>> s;
     if (s==1) { cout << "Saving image...\n";
     cout << "write image name\n";
@@ -554,7 +555,7 @@ else if (n == 21) {
     cin >> filename;
     img.saveImage(filename.c_str());
 }
-else if (n==2) {
+else if (s==2) {
 
     cout << "Exiting program. Goodbye!\n";
     break;
