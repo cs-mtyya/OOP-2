@@ -354,43 +354,43 @@ else if (n == 2) {
     
     cout << "Applying grayscale conversion...\n";
     img = Grey_scale(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
 }
 else if (n == 3) {
     
     cout << "Converting to black and white...\n";
     img = blackandwhiteimage(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
 }
 else if (n == 4) {
     
     cout << "Inverting image colors...\n";
     img = Invert_image(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
 }
 else if (n == 5) {
     
     cout << "Adding frame to image...\n";
     img = Frame_image(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
     
 }
 else if (n == 6) {
    
     cout << "Flipping image...\n";
     img= Flip_Image(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
 }
 else if (n == 7) {
     
     cout << "Rotating image...\n";
    img  =  rotateimage(img);
-   cout<< "filter applied\n";
+   cout<< "\nfilter applied\n";
 }
 else if (n == 8) {
     cout << "Adjusting brightness...\n";
     img = Brightness(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
     
 }
 
@@ -403,7 +403,7 @@ else if (n == 9) {
         cout <<"\nheight: ";
         cin>>height;
         img = resize(img,width ,height); 
-        cout<< "filter applied\n";
+        cout<< "\nfilter applied\n";
     
     
 }
@@ -433,7 +433,7 @@ else if (n == 12) {
     cin >> height;
 
     img = CropImage(img, x , y,width,height);
-    cout << "Image cropped.\n";
+    cout << "\nImage cropped.\n";
 }
 else if (n == 13) {
     
@@ -454,7 +454,7 @@ else if (n == 16) {
 
     cout<<" applying purple effect.....\n";
     img = Purple(img);
-    cout<< "filter applied\n";
+    cout<< "\nfilter applied\n";
    
     
 }
