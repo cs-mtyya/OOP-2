@@ -497,7 +497,7 @@ else if (n == 21) {
     cin >> filename;
     img.saveImage(filename.c_str());
 }
-else if (n==2) {
+else if (s==2) {
 
     cout << "Exiting program. Goodbye!\n";
     break;
