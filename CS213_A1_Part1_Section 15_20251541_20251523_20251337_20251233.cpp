@@ -272,6 +272,34 @@ return img;
         return img2;
 }
 
+Image CropImage(Image img){
+
+
+
+
+
+
+
+
+
+}
+
+
+Image Purple(Image img){
+    for (int i = 0; i < img.height;i++) {
+        for (int j = 0; j < img.width; j++) {
+            img(i,j,0) += 20;
+            img(i,j,1) += 10;
+            img(i,j,2);
+
+        }
+    }
+    return img;
+}
+
+
+
+
 
 
 int main() {
@@ -342,7 +370,7 @@ else if (n == 7) {
 }
 else if (n == 8) {
     cout << "Adjusting brightness...\n";
-    img = Brightness(img);
+    img = Purple(img);
     
 }
 
