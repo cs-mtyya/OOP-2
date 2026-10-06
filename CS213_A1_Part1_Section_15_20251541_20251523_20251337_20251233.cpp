@@ -286,11 +286,11 @@ Image CropImage(Image img){
 
 
 Image Purple(Image img){
-    for (int i = 0; i < img.height;i++) {
-        for (int j = 0; j < img.width; j++) {
-            img(i,j,0) += 20;
-            img(i,j,1) += 10;
-            img(i,j,2);
+    for (int i = 0; i < img.width;i++) {
+        for (int j = 0; j < img.height; j++) {
+            img(i,j,0) *= 0.8;
+            img(i,j,1) *= 0.65;
+            img(i,j,2) *= 0.95;
 
         }
     }
@@ -307,7 +307,6 @@ int main() {
 
     bool r = true;
     while (r){
-
     cout << "\t========================================\n";
     cout << "\t           IMAGE FILTER MENU\n";
     cout << "\t========================================\n";
@@ -320,8 +319,18 @@ int main() {
     cout << "\t 7.  Rotate Image\n";
     cout << "\t 8.  Darken / Lighten\n";
     cout << "\t 9.  Resize Image\n";
-    cout << "\t 10. Save Image\n";
-    cout << "\t 11. Exit\n";
+    cout << "\t 10.  Merge Images\n";
+    cout << "\t 11.  Detect Image Edges\n";
+    cout << "\t 12.  Crop Images\n";
+    cout << "\t 13.  Blur Images\n";
+    cout << "\t 14.  sunlight filter\n";
+    cout << "\t 15.  TV filter\n";
+    cout << "\t 16.  Purple filter\n";
+    cout << "\t 17.  infrared filter\n";
+    cout << "\t 18.  Skewing Filter\n";
+    cout << "\t 19.  Oil painting\n";
+    cout << "\t 20. Save Image\n";
+    cout << "\t 21. Exit\n";
     cout << "\t========================================\n";
     cout << "\n\tEnter your choice: ";
 
@@ -370,7 +379,7 @@ else if (n == 7) {
 }
 else if (n == 8) {
     cout << "Adjusting brightness...\n";
-    img = Purple(img);
+    img = Brightness(img);
     
 }
 
@@ -390,6 +399,58 @@ else if (n == 9) {
 
 else if (n == 10) {
    
+   
+    
+    
+}
+else if (n == 11) {
+    
+   
+    
+}
+else if (n == 12) {
+    
+    
+}
+else if (n == 13) {
+    
+  
+    
+}
+else if (n == 14) {
+    
+    
+    
+}
+else if (n == 15) {
+    
+   
+    
+}
+else if (n == 16) {
+
+    cout<<" applying purple effect.....\n";
+    img = Purple(img);
+   
+    
+}
+
+else if (n == 17) {
+    
+   
+}
+else if (n == 18) {
+    
+  
+}
+
+else if (n == 19) {
+    
+ 
+    
+}
+else if (n == 20) {
+    
     cout << "Saving image...\n";
     cout << "write image name\n";
     string filename;
@@ -398,12 +459,16 @@ else if (n == 10) {
 
     
 }
-else if (n == 11) {
+
+
+else if (n == 21) {
     
     cout << "Exiting program. Goodbye!\n";
     break;
     
 }
+
+
 else {
     cout << "Invalid choice! Please try again.\n";
 }
