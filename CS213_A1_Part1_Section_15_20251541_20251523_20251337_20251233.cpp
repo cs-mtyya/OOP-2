@@ -147,89 +147,9 @@ Image rotateimage(Image img) {
     }
     return img;
 }
-Image Grey_scale(Image img) {
-
-    for (int y = 0; y < img.height;y++) {
-        for (int x = 0; x < img.width; x++) {
-            int grey = 0;
-            for (int k = 0;k < 3;k++)
-            {
-                grey += img.getPixel(x, y, k);
-
-
-            }
-            grey = grey / 3;
-            for (int k = 0;k < 3;k++)
-            {
-               
-                img.setPixel(x, y, k, grey);
-
-            }
 
 
 
-        }
-    }
-    return img;
-}
-
-
-Image Flip_Image(Image img)
-{
- 
-
-    Image newiamge(img.width, img.height);
-    char flip;
-    cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
-    cout << "Your choice: ";
-    cin >> flip;
-    if (flip=='H') {
-        for (int y = 0;y < img.height;y++){
-            for (int x = img.width-1; 0 <= x;x--)
-            {
-                  int newX = img.width - 1 - x;
-
-                int R = img.getPixel(x, y, 0);
-                int G = img.getPixel(x, y, 1);
-                int B = img.getPixel(x, y, 2);
-                    
-              
-                newiamge.setPixel(newX, y, 0, R);
-                newiamge.setPixel(newX, y, 1, G);
-                newiamge.setPixel(newX, y, 2, B);
-
-         
-         } 
-}
-        return newiamge;
-
-
-
-    }
-    else {
-        Image newiamge(img.width, img.height);
-        for (int x = 0;x < img.width;x++) {
-
-            for (int y = img.height - 1;y >= 0;y--) {
-
-                int newy = img.height - 1 - y;
-
-                int R = img.getPixel(x, y, 0);
-                int G = img.getPixel(x, y, 1);
-                int B = img.getPixel(x, y, 2);
-
-
-                newiamge.setPixel(x, newy, 0, R);
-                newiamge.setPixel(x, newy, 1, G);
-                newiamge.setPixel(x, newy, 2, B);
-           
-  }
- }
-        return newiamge;
-           
-    }
-
-}
 Image Brightness(Image img) {
     cout << "1- Darken \n";
     cout << "2- lighten \n";
@@ -345,8 +265,8 @@ Image sunlight(Image img) {
         for (int y = 0; y < img.height;y++)
         {
 
-            img.setPixel(x, y, 0, min(img.getPixel(x, y, 0) + 80, 255));
-            img.setPixel(x, y, 1, min(img.getPixel(x, y, 1) + 65, 255));
+            img.setPixel(x, y, 0, min(img.getPixel(x, y, 0) + 90, 255));
+            img.setPixel(x, y, 1, min(img.getPixel(x, y, 1) + 75, 255));
             img.setPixel(x, y, 2, min(img.getPixel(x, y, 2) + 10, 255));
         }
 
@@ -354,59 +274,88 @@ Image sunlight(Image img) {
     return img;
 
 
+}
+Image Flip_Image(Image img)
+{
 
+
+    Image newiamge(img.width, img.height);
+    char flip;
+    cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
+    cout << "Your choice: ";
+    cin >> flip;
+    if (flip == 'H') {
+        for (int y = 0;y < img.height;y++) {
+            for (int x = img.width - 1; 0 <= x;x--)
+            {
+                int newX = img.width - 1 - x;
+
+                int R = img.getPixel(x, y, 0);
+                int G = img.getPixel(x, y, 1);
+                int B = img.getPixel(x, y, 2);
+
+
+                newiamge.setPixel(newX, y, 0, R);
+                newiamge.setPixel(newX, y, 1, G);
+                newiamge.setPixel(newX, y, 2, B);
+
+
+            }
+        }
+        return newiamge;
+
+
+
+    }
+    else {
+        Image newiamge(img.width, img.height);
+        for (int x = 0;x < img.width;x++) {
+
+            for (int y = img.height - 1;y >= 0;y--) {
+
+                int newy = img.height - 1 - y;
+
+                int R = img.getPixel(x, y, 0);
+                int G = img.getPixel(x, y, 1);
+                int B = img.getPixel(x, y, 2);
+
+
+                newiamge.setPixel(x, newy, 0, R);
+                newiamge.setPixel(x, newy, 1, G);
+                newiamge.setPixel(x, newy, 2, B);
+
+            }
+        }
+        return newiamge;
+
+    }
 
 }
+Image Grey_scale(Image img) {
+
+    for (int y = 0; y < img.height;y++) {
+        for (int x = 0; x < img.width; x++) {
+            int grey = 0;
+            for (int k = 0;k < 3;k++)
+            {
+                grey += img.getPixel(x, y, k);
+
+
+            }
+            grey = grey / 3;
+            for (int k = 0;k < 3;k++)
+            {
+
+                img.setPixel(x, y, k, grey);
+
+            }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
+    }
+    return img;
+}
 
 
 
@@ -419,209 +368,214 @@ int main() {
     Image img;
 
     bool r = true;
-    while (r){
-    cout << "\t========================================\n";
-    cout << "\t           IMAGE FILTER MENU\n";
-    cout << "\t========================================\n";
-    cout << "\t 1.  Load a New Image\n";
-    cout << "\t 2.  Grayscale Conversion\n";
-    cout << "\t 3.  Black and White\n";
-    cout << "\t 4.  Invert Image\n";
-    cout << "\t 5.  Add Frame\n";
-    cout << "\t 6.  Flip Image\n";
-    cout << "\t 7.  Rotate Image\n";
-    cout << "\t 8.  Darken / Lighten\n";
-    cout << "\t 9.  Resize Image\n";
-    cout << "\t 10.  Merge Images\n";
-    cout << "\t 11.  Detect Image Edges\n";
-    cout << "\t 12.  Crop Images\n";
-    cout << "\t 13.  Blur Images\n";
-    cout << "\t 14.  sunlight filter\n";
-    cout << "\t 15.  TV filter\n";
-    cout << "\t 16.  Purple filter\n";
-    cout << "\t 17.  infrared filter\n";
-    cout << "\t 18.  Skewing Filter\n";
-    cout << "\t 19.  Oil painting\n";
-    cout << "\t 20. Save Image\n";
-    cout << "\t 21. Exit\n";
-    cout << "\t========================================\n";
-    cout << "\n\tEnter your choice: ";
-
-    
-    int n;
-    cin >> n;
-
-   if (n == 1) {
-    
-
-    cout << "Loading a new image...";
-    cout << "\t Enter the image name: ";
-    string imgname;
-    cin >> imgname;
-    if (imgname.find(".jpg") == string::npos)
-        imgname += ".jpg";
-    img = loadimage(imgname);
-    
-}
-else if (n == 2) {
-    
-    cout << "Applying grayscale conversion...\n";
-    img = Grey_scale(img);
-    cout<< "\nfilter applied\n";
-}
-else if (n == 3) {
-    
-    cout << "Converting to black and white...\n";
-    img = blackandwhiteimage(img);
-    cout<< "\nfilter applied\n";
-}
-else if (n == 4) {
-    
-    cout << "Inverting image colors...\n";
-    img = Invert_image(img);
-    cout<< "\nfilter applied\n";
-}
-else if (n == 5) {
-    
-    cout << "Adding frame to image...\n";
-    img = Frame_image(img);
-    cout<< "\nfilter applied\n";
-    
-}
-else if (n == 6) {
-   
-    cout << "Flipping image...\n";
-    img= Flip_Image(img);
-    cout<< "\nfilter applied\n";
-}
-else if (n == 7) {
-    
-    cout << "Rotating image...\n";
-   img  =  rotateimage(img);
-   cout<< "\nfilter applied\n";
-}
-else if (n == 8) {
-    cout << "Adjusting brightness...\n";
-    img = Brightness(img);
-    cout<< "\nfilter applied\n";
-    
-}
-
-else if (n == 9) {
-    cout << "resizing image...\n";
-    int width,height;
-    cout<<"write dimensions\n";
-        cout<< "\nwidth: ";
-        cin>>width;
-        cout <<"\nheight: ";
-        cin>>height;
-        img = resize(img,width ,height); 
-        cout<< "\nfilter applied\n";
-    
-    
-}
+    while (r) {
+        cout << "\t========================================\n";
+        cout << "\t           IMAGE FILTER MENU\n";
+        cout << "\t========================================\n";
+        cout << "\t 1.  Load a New Image\n";
+        cout << "\t 2.  Grayscale Conversion\n";
+        cout << "\t 3.  Black and White\n";
+        cout << "\t 4.  Invert Image\n";
+        cout << "\t 5.  Add Frame\n";
+        cout << "\t 6.  Flip Image\n";
+        cout << "\t 7.  Rotate Image\n";
+        cout << "\t 8.  Darken / Lighten\n";
+        cout << "\t 9.  Resize Image\n";
+        cout << "\t 10.  Merge Images\n";
+        cout << "\t 11.  Detect Image Edges\n";
+        cout << "\t 12.  Crop Images\n";
+        cout << "\t 13.  Blur Images\n";
+        cout << "\t 14.  sunlight filter\n";
+        cout << "\t 15.  TV filter\n";
+        cout << "\t 16.  Purple filter\n";
+        cout << "\t 17.  infrared filter\n";
+        cout << "\t 18.  Skewing Filter\n";
+        cout << "\t 19.  Oil painting\n";
+        cout << "\t 20. Save Image\n";
+        cout << "\t 21. Exit\n";
+        cout << "\t========================================\n";
+        cout << "\n\tEnter your choice: ";
 
 
-else if (n == 10) {
-       cout << "merging iamge....\n";
-           img = marge(img);
-           cout << "\nfilter applied\n";
+        int n;
+        cin >> n;
 
-    
-}
-else if (n == 11) {
-    
-   
-    
-}
-else if (n == 12) {
-    cout<< "cropping image.....\n";
-    int x,y,width,height;
-    cout << "Enter x (starting column): ";
-    cin >> x;
-    cout << "Enter y (starting row): ";
-    cin >> y;
-    cout << "Enter width of the crop: ";
-    cin >> width;
-    cout << "Enter height of the crop: ";
-    cin >> height;
+        switch (n) {
 
-    img = CropImage(img, x , y,width,height);
-    cout << "\nImage cropped.\n";
-}
-else if (n == 13) {
-      
-}
-else if (n == 14) {
-    
-     cout << "applaying sunlihght filter....... \n";
-       img = sunlight(img);
-       cout << "\nfilter applied\n";
-    
-}
-else if (n == 15) {
-    
-   
-    
-}
-else if (n == 16) {
+        case 1: {
+            cout << "Loading a new image...";
+            cout << "\t Enter the image name: ";
+            string imgname;
+            cin.ignore();
+            getline(cin, imgname);
+            img = loadimage(imgname);
+            break;
+        }
 
-    cout<<" applying purple effect.....\n";
-    img = Purple(img);
-    cout<< "\nfilter applied\n";
-   
-    
-}
+        case 2:
 
-else if (n == 17) {
-    
-   
-}
-else if (n == 18) {
-    
-  
-}
+            cout << "Applying grayscale conversion...\n";
+            img = Grey_scale(img);
+            cout << "\nfilter applied\n";
+            break;
+        case 3:
 
-else if (n == 19) {
-    
- 
-    
-}
-else if (n == 20) {
-    
-    cout << "Saving image...\n";
-    cout << "write image name\n";
-    string filename;
-    cin >> filename;
-    if (filename.find(".jpg") == string::npos)
-    filename += ".jpg";
-    img.saveImage(filename.c_str());
+            cout << "Converting to black and white...\n";
+            img = blackandwhiteimage(img);
+            cout << "\nfilter applied\n";
+            break;
+        case 4:
 
-    
+            cout << "Inverting image colors...\n";
+            img = Invert_image(img);
+            cout << "\nfilter applied\n";
+            break;
+        case 5:
+
+            cout << "Adding frame to image...\n";
+            img = Frame_image(img);
+            cout << "\nfilter applied\n";
+            break;
+
+        case 6:
+
+            cout << "Flipping image...\n";
+            img = Flip_Image(img);
+            cout << "\nfilter applied\n";
+            break;
+
+        case 7:
+
+            cout << "Rotating image...\n";
+            img = rotateimage(img);
+            cout << "\nfilter applied\n";
+            break;
+        case 8:
+            cout << "Adjusting brightness...\n";
+            img = Brightness(img);
+            cout << "\nfilter applied\n";
+            break;
+
+
+        case 9:{
+            cout << "resizing image...\n";
+            int width, height;
+            cout << "write dimensions\n";
+            cout << "\nwidth: ";
+            cin >> width;
+            cout << "\nheight: ";
+            cin >> height;
+            img = resize(img, width, height);
+            cout << "\nfilter applied\n";
+            break;
 }
 
 
-else if (n == 21) {
-    int s;
-    
-    cout << "\t 1. save before exit\n";
-    cout<< "\t 2.discard\n";
-    cout<<"\n Enter choice: \n";
-    cin>> s;
-    if (s==1) { cout << "Saving image...\n";
-    cout << "write image name\n";
-    string filename;
-    cin >> filename;
-    img.saveImage(filename.c_str());
-}
 
-}
+        case 10:
+            cout << "merging iamge....\n";
+            img = marge(img);
+            cout << "\nfilter applied\n";
+            break;
 
 
-else {
-    cout << "Invalid choice! Please try again.\n";
+        case 11:
+
+
+
+            break;
+        case 12:
+            cout << "cropping image.....\n";
+            int x, y, width, height;
+            cout << "Enter x (starting column): ";
+            cin >> x;
+            cout << "Enter y (starting row): ";
+            cin >> y;
+            cout << "Enter width of the crop: ";
+            cin >> width;
+            cout << "Enter height of the crop: ";
+            cin >> height;
+
+            img = CropImage(img, x, y, width, height);
+            cout << "\nImage cropped.\n";
+            break;
+        case 13:
+
+            break;
+        case 14:
+
+            cout << "applaying sunlihght filter....... \n";
+            img = sunlight(img);
+            cout << "\nfilter applied\n";
+            break;
+        case 15:
+
+
+            break;
+        case 16:
+
+            cout << " applying purple effect.....\n";
+            img = Purple(img);
+            cout << "\nfilter applied\n";
+            break;
+
+
+
+        case 17:
+
+
+            break;
+
+        case 18:
+
+
+            break;
+
+        case 19:
+
+
+
+            break;
+        case 20:{
+
+            cout << "Saving image...\n";
+            cout << "write image name\n";
+            string filename;
+            cin.ignore();
+            getline(cin, filename);
+            if (filename.find(".jpg") == string::npos)
+                filename += ".jpg";
+            img.saveImage(filename.c_str());
+
+
+            break;}
+
+
+        case 21:
+        {
+            int s;
+
+            cout << "\t 1. save before exit\n";
+            cout << "\t 2.discard\n";
+            cout << "\n Enter choice: \n";
+            cin >> s;
+            if (s == 1) {
+                cout << "Saving image...\n";
+                cout << "write image name\n";
+                string filename;
+                cin >> filename;
+                img.saveImage(filename.c_str());
+            }
+            r = false;
+            break;
 }
 
-}
-return 0;
+        default:
+            cout << "Invalid choice! Please try again.\n";
+            break;
+
+        }
+     
+    } 
+    return 0;
 }
