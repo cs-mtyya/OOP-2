@@ -151,17 +151,23 @@ Image Grey_scale(Image img) {
 
     for (int y = 0; y < img.height;y++) {
         for (int x = 0; x < img.width; x++) {
+            int grey = 0;
+            for (int k = 0;k < 3;k++)
+            {
+                grey += img.getPixel(x, y, k);
 
 
-            int R = img.getPixel(x, y, 0);
-            int G = img.getPixel(x, y, 1);
-            int B = img.getPixel(x, y, 2);
+            }
+            grey = grey / 3;
+            for (int k = 0;k < 3;k++)
+            {
+               
+                img.setPixel(x, y, k, grey);
 
-            int grey = (R + G + B) / 3;
+            }
 
-            img.setPixel(x, y, 0, grey);
-            img.setPixel(x, y, 1, grey);
-            img.setPixel(x, y, 2, grey);
+
+
         }
     }
     return img;
@@ -170,6 +176,7 @@ Image Grey_scale(Image img) {
 
 Image Flip_Image(Image img)
 {
+ 
 
     Image newiamge(img.width, img.height);
     char flip;
@@ -306,9 +313,50 @@ Image Purple(Image img){
 }
 //                                                         **                               ABDLRHAMN                        **
 
+Image marge(Image img1) {
+    string name;
+    cout << "load the image u want to marge \n ";
+    cin.ignore();
+    getline(cin, name);
+    Image img2;
+    img2.loadNewImage(name);
+
+    int w = min(img1.width, img2.width);
+    int h = min(img1.height, img2.height);
+  
+        Image result(w,h);
+        for (int x = 0;x < img1.width;x++){
+         for (int y = 0;y < img1.height;y++){
+             for (int k = 0;k < 3;k++) {
+
+                 int avg = (img1.getPixel(x, y, k) + img2.getPixel(x, y, k)) / 2;
+                 result.setPixel(x, y, k, avg);
+             }
+
+            }
+        
+}
+        return result;
+}
+
+Image sunlight(Image img) {
+    for (int x = 0;x < img.width;x++)
+    {   
+        for (int y = 0; y < img.height;y++)
+        {
+
+            img.setPixel(x, y, 0, min(img.getPixel(x, y, 0) + 80, 255));
+            img.setPixel(x, y, 1, min(img.getPixel(x, y, 1) + 65, 255));
+            img.setPixel(x, y, 2, min(img.getPixel(x, y, 2) + 10, 255));
+        }
+
+    }
+    return img;
 
 
 
+
+}
 
 
 
@@ -405,9 +453,13 @@ int main() {
 
    if (n == 1) {
     
-    cout << "Loading a new image...\n";
+
+    cout << "Loading a new image...";
+    cout << "\t Enter the image name: ";
     string imgname;
     cin >> imgname;
+    if (imgname.find(".jpg") == string::npos)
+        imgname += ".jpg";
     img = loadimage(imgname);
     
 }
@@ -471,8 +523,9 @@ else if (n == 9) {
 
 
 else if (n == 10) {
-   
-   
+       cout << "merging iamge....\n";
+           img = marge(img);
+           cout << "\nfilter applied\n";
 
     
 }
@@ -497,13 +550,13 @@ else if (n == 12) {
     cout << "\nImage cropped.\n";
 }
 else if (n == 13) {
-    
-  
-    
+      
 }
 else if (n == 14) {
     
-    
+     cout << "applaying sunlihght filter....... \n";
+       img = sunlight(img);
+       cout << "\nfilter applied\n";
     
 }
 else if (n == 15) {
@@ -540,6 +593,8 @@ else if (n == 20) {
     cout << "write image name\n";
     string filename;
     cin >> filename;
+    if (filename.find(".jpg") == string::npos)
+    filename += ".jpg";
     img.saveImage(filename.c_str());
 
     
@@ -559,11 +614,7 @@ else if (n == 21) {
     cin >> filename;
     img.saveImage(filename.c_str());
 }
-else if (s==2) {
 
-    cout << "Exiting program. Goodbye!\n";
-    break;
-}
 }
 
 
