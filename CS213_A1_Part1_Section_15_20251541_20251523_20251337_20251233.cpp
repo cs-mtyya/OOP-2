@@ -563,7 +563,8 @@ int main() {
                 cout << "Saving image...\n";
                 cout << "write image name\n";
                 string filename;
-                cin >> filename;
+                cin.ignore();
+                getline(cin, filename);
                 img.saveImage(filename.c_str());
             }
             r = false;
