@@ -408,7 +408,7 @@ Image Grey_scale(Image img) {
 Image skew(Image img)
 {
     int dgree;
-    cout << "Enter skew angle in degrees : \n ";
+    cout << "Enter skew angle from 0 to 50  in degrees : \n "; 
     cin >> dgree;
   double rad = ((dgree * 3.14) / 180);
     int maxshift = ((img.height - 1) * tan(rad));
