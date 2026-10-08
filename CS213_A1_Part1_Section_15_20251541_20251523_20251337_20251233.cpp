@@ -18,9 +18,10 @@ using namespace std;
 void oilPaintingFilter(Image& image) {
     for (int i = 0; i < image.width; i++) {
         for (int j = 0; j < image.height; j++) {
-            image(i, j, 0) = (image(i, j, 0) / 32) * 32;
-            image(i, j, 1) = (image(i, j, 1) / 32) * 32;
-            image(i, j, 2) = (image(i, j, 2) / 32) * 32;
+            image(i, j, 0) = (image(i, j, 0) / 32) * 32 ;
+            image(i, j, 1) = (image(i, j, 1) / 32) * 32 ;
+            image(i, j, 2) = (image(i, j, 2) / 32) * 32 ;
+            
         }
     }
 }
