@@ -15,7 +15,6 @@ using namespace std;
 #include <cmath>
 #include <algorithm>
 #include <fstream>
-//.
 void imageedges(Image& image){
         
     for (int i = 0; i < image.width; i++) {
@@ -530,6 +529,10 @@ int main() {
 
         case 11:
 
+            cout << "  Detecting Image Edges \n";
+            imageedges(img);
+            cout << "filter applayed \n";
+
 
 
             break;
@@ -559,6 +562,9 @@ int main() {
             break;
         case 15:
 
+            cout << "applayin tv filter \n";
+        tvFilter(img);
+        cout << "filter applyed \n";
 
             break;
         case 16:
