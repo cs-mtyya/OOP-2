@@ -405,6 +405,61 @@ Image Grey_scale(Image img) {
     return img;
 }
 
+Image skew(Image img)
+{
+    int dgree;
+    cout << "Enter skew angle in degrees : \n ";
+    cin >> dgree;
+  double rad = ((dgree * 3.14) / 180);
+    int maxshift = ((img.height - 1) * tan(rad));
+        int newWidth = img.width + maxshift;
+
+
+    Image result(newWidth, img.height);
+
+    for (int x = 0; x < newWidth; x++){
+        for (int y = 0; y < img.height; y++) {
+            for (int k = 0; k < 3; k++){
+                result.setPixel(x, y, k, 255);}
+        }
+    }
+    for(int y=0;y<img.height;y++)
+    {
+        int shift = (img.height - 1 - y) * rad;
+        for (int x=0; x < img.width;x++)
+            for (int k = 0;k < 3;k++)
+                result.setPixel(x + shift, y, k, img.getPixel(x, y, k));
+
+    
+    }
+    return result;
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //                                                       **                               ABDLRHAMN                        **
@@ -583,7 +638,9 @@ int main() {
 
         case 18:
 
-
+            cout << "skewness.... \n";
+            img = skew(img);
+            cout << "filter applyed \n";
             break;
 
         case 19:
