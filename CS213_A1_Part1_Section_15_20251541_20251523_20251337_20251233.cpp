@@ -1,7 +1,7 @@
 //====================================================================================
 //======================================Part 1========================================
 //Mohamed Tamer : 20251523 |||| filter: 3, 7
-//Mohamed Assem:20251337  ||| filter: 2, 6
+//Mohamed Assem:20251337  ||| filter: 2, 6, 10, 14, 18
 //Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8, 12, 16
 //Abdlruhman Mohamed: 20251233 |||| filter: 1, 5 , 9 , 13
 //section: S15
@@ -15,6 +15,15 @@ using namespace std;
 #include <cmath>
 #include <algorithm>
 #include <fstream>
+void oilPaintingFilter(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            image(i, j, 0) = (image(i, j, 0) / 32) * 32;
+            image(i, j, 1) = (image(i, j, 1) / 32) * 32;
+            image(i, j, 2) = (image(i, j, 2) / 32) * 32;
+        }
+    }
+}
 void imageedges(Image& image){
         
     for (int i = 0; i < image.width; i++) {
