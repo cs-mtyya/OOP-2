@@ -2,7 +2,7 @@
 //======================================Part 1========================================
 //Mohamed Tamer : 20251523 |||| filter: 3, 7
 //Mohamed Assem:20251337  ||| filter: 2, 6
-//Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8
+//Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8, 12, 16
 //Abdlruhman Mohamed: 20251233 |||| filter: 1, 5 , 9 , 13
 //section: S15
 //===================================================================================
@@ -463,6 +463,35 @@ Image skew(Image img)
 
 
 //                                                       **                               ABDLRHAMN                        **
+Image Blur(Image img, int radius) {
+    if (radius <= 0) {
+        cout << "Invalid radius. Must be greater than 0." << endl;
+        return img;
+    }
+    Image newImage(img.width, img.height);
+    for (int x = 0; x < img.width; x++) {
+        for (int y = 0; y < img.height; y++) {
+            int sumR = 0, sumG = 0, sumB = 0;
+            int count = 0; // to make avg later on 
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dy = -radius; dy <= radius; dy++) {
+                    int newX = x + dx;
+                    int newY = y + dy;
+                    if (newX >= 0 && newX < img.width && newY >= 0 && newY < img.height) {
+                        sumR += img.getPixel(newX, newY, 0);
+                        sumG += img.getPixel(newX, newY, 1);
+                        sumB += img.getPixel(newX, newY, 2);
+                        count++;
+                    }
+                }
+            }
+            newImage.setPixel(x, y, 0, sumR / count);
+            newImage.setPixel(x, y, 1, sumG / count);
+            newImage.setPixel(x, y, 2, sumB / count);
+        }
+    }
+    return newImage;
+}
 
 
 
@@ -607,7 +636,12 @@ int main() {
             cout << "\nImage cropped.\n";
             break;
         case 13:
-
+            cout << "Applying blur filter...\n";
+            int percentage;
+            cout << "Enter blur percentage (1-100): ";
+            cin >> percentage; 
+            img = Blur(img, percentage);
+            cout << "\nfilter applied\n";
             break;
         case 14:
 
@@ -632,6 +666,7 @@ int main() {
 
 
         case 17:
+
 
 
             break;
