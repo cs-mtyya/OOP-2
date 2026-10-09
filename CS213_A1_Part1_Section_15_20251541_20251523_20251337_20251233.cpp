@@ -1,7 +1,7 @@
 //====================================================================================
 //======================================Part 1========================================
 //Mohamed Tamer : 20251523 |||| filter: 3, 7
-//Mohamed Assem:20251337  ||| filter: 2, 6, 10, 14, 18
+//Mohamed Assem:20251337  ||| filter: 2, 6
 //Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8, 12, 16
 //Abdlruhman Mohamed: 20251233 |||| filter: 1, 5 , 9 , 13
 //section: S15
@@ -15,16 +15,6 @@ using namespace std;
 #include <cmath>
 #include <algorithm>
 #include <fstream>
-void oilPaintingFilter(Image& image) {
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            image(i, j, 0) = (image(i, j, 0) / 32) * 32 ;
-            image(i, j, 1) = (image(i, j, 1) / 32) * 32 ;
-            image(i, j, 2) = (image(i, j, 2) / 32) * 32 ;
-            
-        }
-    }
-}
 void imageedges(Image& image){
         
     for (int i = 0; i < image.width; i++) {
@@ -415,61 +405,6 @@ Image Grey_scale(Image img) {
     return img;
 }
 
-Image skew(Image img)
-{
-    int dgree;
-    cout << "Enter skew angle from 0 to 50  in degrees : \n "; 
-    cin >> dgree;
-  double rad = ((dgree * 3.14) / 180);
-    int maxshift = ((img.height - 1) * tan(rad));
-        int newWidth = img.width + maxshift;
-
-
-    Image result(newWidth, img.height);
-
-    for (int x = 0; x < newWidth; x++){
-        for (int y = 0; y < img.height; y++) {
-            for (int k = 0; k < 3; k++){
-                result.setPixel(x, y, k, 255);}
-        }
-    }
-    for(int y=0;y<img.height;y++)
-    {
-        int shift = (img.height - 1 - y) * rad;
-        for (int x=0; x < img.width;x++)
-            for (int k = 0;k < 3;k++)
-                result.setPixel(x + shift, y, k, img.getPixel(x, y, k));
-
-    
-    }
-    return result;
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //                                                       **                               ABDLRHAMN                        **
@@ -502,7 +437,25 @@ Image Blur(Image img, int radius) {
     }
     return newImage;
 }
+Image infrared(Image img) {
+    Image newImage(img.width, img.height);
+    for (int x = 0; x < img.width; x++) {
+        for (int y = 0; y < img.height; y++) {
+            int R = img.getPixel(x, y, 0);
+            int G = img.getPixel(x, y, 1);
+            int B = img.getPixel(x, y, 2);
 
+            int newR = std::min(255, R + 100);
+            int newG = std::max(0, G - 50);
+            int newB = std::max(0, B - 50); 
+
+            img.setPixel(x, y, 0, newR);
+            img.setPixel(x, y, 1, newG);
+            img.setPixel(x, y, 2, newB);
+        }
+    }
+    return img;
+}
 
 
 
@@ -676,6 +629,9 @@ int main() {
 
 
         case 17:
+        cout << "applying infrared filter.....\n";
+        img = infrared(img);
+        cout << "\nfilter applied\n";
 
 
 
@@ -683,15 +639,13 @@ int main() {
 
         case 18:
 
-            cout << "skewness.... \n";
-            img = skew(img);
-            cout << "filter applyed \n";
+
             break;
 
         case 19:
-            cout << "applaying oilPainting Filter \n ";
-            oilPaintingFilter(img);
-            cout << "filter oil painted \n";
+
+
+
             break;
         case 20:{
 
