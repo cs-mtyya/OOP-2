@@ -689,9 +689,9 @@ int main() {
             break;
 
         case 19:
-
-
-
+            cout << "applaying oilPainting Filter \n ";
+            oilPaintingFilter(img);
+            cout << "filter oil painted \n";
             break;
         case 20:{
 
