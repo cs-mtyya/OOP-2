@@ -15,6 +15,118 @@ using namespace std;
 #include <cmath>
 #include <algorithm>
 #include <fstream>
+void blackandwhiteimage(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int red = image(i, j, 0);
+            int green = image(i, j, 1);
+            int blue = image(i, j, 2);
+            int average = (red + green + blue) / 3;
+            if (average < 127) {
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
+            } else {
+                image(i, j, 0) = 255;
+                image(i, j, 1) = 255;
+                image(i, j, 2) = 255;
+            }
+        }
+    }
+}
+void rotateimage(Image& image) {
+    int angle;
+    cout << "Enter the angle of rotation (90, 180, 270): ";
+    cin >> angle;
+    if (angle == 180) {
+        Image newImage(image.width, image.height);
+        for (int i = 0; i < image.width; i++) {
+            for (int j = 0; j < image.height; j++) {
+                int new_i = image.width - 1 - i;
+                int new_j = image.height - 1 - j;
+                newImage(new_i, new_j, 0) = image(i, j, 0);
+                newImage(new_i, new_j, 1) = image(i, j, 1);
+                newImage(new_i, new_j, 2) = image(i, j, 2);
+            }
+        }
+        image = newImage;
+    }
+    else if (angle == 90) {
+        Image newImage(image.height, image.width);
+        for (int i = 0; i < image.width; i++) {
+            for (int j = 0; j < image.height; j++) {
+                int new_i = image.height - 1 - j;
+                int new_j = i;
+                newImage(new_i, new_j, 0) = image(i, j, 0);
+                newImage(new_i, new_j, 1) = image(i, j, 1);
+                newImage(new_i, new_j, 2) = image(i, j, 2);
+            }
+        }
+        image = newImage;
+    }
+    else if (angle == 270) {
+        Image newImage(image.height, image.width);
+        for (int i = 0; i < image.width; i++) {
+            for (int j = 0; j < image.height; j++) {
+                int new_i = j;
+                int new_j = image.width - 1 - i;
+                newImage(new_i, new_j, 0) = image(i, j, 0);
+                newImage(new_i, new_j, 1) = image(i, j, 1);
+                newImage(new_i, new_j, 2) = image(i, j, 2);
+            }
+        }
+        image = newImage;
+    }
+    else {
+        cout << "Invalid angle!" << endl;
+    }
+    void imageedges(Image& image){
+        void detectimageedges(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int red = image(i, j, 0);
+            int green = image(i, j, 1);
+            int blue = image(i, j, 2);
+            
+            int average = (red + green + blue) / 3;
+            
+            if (average < 127) {
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
+            } else {
+                image(i, j, 0) = 255;
+                image(i, j, 1) = 255;
+                image(i, j, 2) = 255;
+            }
+        }
+    }
+
+    Image newImage(image.width, image.height);
+
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            newImage(i, j, 0) = 255;
+            newImage(i, j, 1) = 255;
+            newImage(i, j, 2) = 255;
+        }
+    }
+
+    for (int i = 0; i < image.width - 1; i++) {
+        for (int j = 0; j < image.height - 1; j++) {
+            if (image(i, j, 0) != image(i + 1, j, 0) || image(i, j, 0) != image(i, j + 1, 0)) {
+                newImage(i, j, 0) = 0;
+                newImage(i, j, 1) = 0;
+                newImage(i, j, 2) = 0;
+            }
+        }
+    }
+
+    image = newImage;
+}
+    }
+    
+}
 void imageedges(Image& image){
         
     for (int i = 0; i < image.width; i++) {
