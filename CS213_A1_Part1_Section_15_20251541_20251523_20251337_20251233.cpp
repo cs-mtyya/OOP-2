@@ -686,8 +686,6 @@ int main() {
             break;
 
 
-            break;
-
         case 19:
             cout << "applaying oilPainting Filter \n ";
             oilPaintingFilter(img);
