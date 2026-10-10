@@ -16,6 +16,17 @@ using namespace std;
 #include <algorithm>
 #include <fstream>
 
+void oilPaintingFilter(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            image(i, j, 0) = (image(i, j, 0) / 32) * 32;
+            image(i, j, 1) = (image(i, j, 1) / 32) * 32;
+            image(i, j, 2) = (image(i, j, 2) / 32) * 32;
+
+        }
+    }
+}
+
 
 void imageedges(Image& image){
         
@@ -406,6 +417,42 @@ Image Grey_scale(Image img) {
     }
     return img;
 }
+Image skew(Image img)
+{
+    int dgree;
+    cout << "Enter skew angle from 0 to 50  in degrees : \n ";
+    cin >> dgree;
+    double rad = ((dgree * 3.14) / 180);
+    int maxshift = ((img.height - 1) * tan(rad));
+    int newWidth = img.width + maxshift;
+
+
+    Image result(newWidth, img.height);
+
+    for (int x = 0; x < newWidth; x++) {
+        for (int y = 0; y < img.height; y++) {
+            for (int k = 0; k < 3; k++) {
+                result.setPixel(x, y, k, 255);
+            }
+        }
+    }
+    for (int y = 0;y < img.height;y++)
+    {
+        int shift = (img.height - 1 - y) * rad;
+        for (int x = 0; x < img.width;x++)
+            for (int k = 0;k < 3;k++)
+                result.setPixel(x + shift, y, k, img.getPixel(x, y, k));
+
+
+    }
+    return result;
+
+
+
+
+}
+
+
 
 
 
@@ -419,7 +466,7 @@ Image Blur(Image img, int radius) {
     for (int x = 0; x < img.width; x++) {
         for (int y = 0; y < img.height; y++) {
             int sumR = 0, sumG = 0, sumB = 0;
-            int count = 0; // to make avg later on 
+            int count = 0; 
             for (int dx = -radius; dx <= radius; dx++) {
                 for (int dy = -radius; dy <= radius; dy++) {
                     int newX = x + dx;
@@ -633,10 +680,19 @@ int main() {
 
         case 18:
 
+            cout << "skewness.... \n";
+            img = skew(img);
+            cout << "filter applyed \n";
+            break;
+
 
             break;
 
         case 19:
+            cout << "applaying oilPainting Filter \n ";
+            oilPaintingFilter(img);
+            cout << "filter oil painted \n";
+            break;
 
 
 
