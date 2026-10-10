@@ -440,23 +440,15 @@ Image Blur(Image img, int radius) {
     return newImage;
 }
 Image infrared(Image img) {
-    Image newImage(img.width, img.height);
-    for (int x = 0; x < img.width; x++) {
-        for (int y = 0; y < img.height; y++) {
-            int R = img.getPixel(x, y, 0);
-            int G = img.getPixel(x, y, 1);
-            int B = img.getPixel(x, y, 2);
-
-            int newR = std::min(255, R + 100);
-            int newG = std::max(0, G - 50);
-            int newB = std::max(0, B - 50); 
-
-            img.setPixel(x, y, 0, newR);
-            img.setPixel(x, y, 1, newG);
-            img.setPixel(x, y, 2, newB);
-        }
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            img(i,j,0) = 255;
+            img(i,j,1) =255- img(i,j,1);
+            img(i,j,2) =255- img(i,j,2);
+        
     }
-    return img;
+}
+  return img;
 }
 
 
