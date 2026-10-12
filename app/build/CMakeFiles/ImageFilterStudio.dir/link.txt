@@ -1,0 +1,3 @@
+C:\msys64\ucrt64\bin\cmake.exe -E rm -f CMakeFiles\ImageFilterStudio.dir/objects.a
+C:\msys64\ucrt64\bin\ar.exe qc CMakeFiles\ImageFilterStudio.dir/objects.a @CMakeFiles\ImageFilterStudio.dir\objects1.rsp
+C:\msys64\ucrt64\bin\c++.exe -O3 -DNDEBUG -mwindows -static-libgcc -static-libstdc++ -Wl,--whole-archive CMakeFiles\ImageFilterStudio.dir/objects.a -Wl,--no-whole-archive -o PixelStudio.exe -Wl,--out-implib,libPixelStudio.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ImageFilterStudio.dir\linkLibs.rsp

@@ -1,0 +1,5 @@
+C:/Users/Administrator/Documents/GitHub/OOP-2/app/build/CMakeFiles/ImageFilterStudio.dir
+C:/Users/Administrator/Documents/GitHub/OOP-2/app/build/CMakeFiles/edit_cache.dir
+C:/Users/Administrator/Documents/GitHub/OOP-2/app/build/CMakeFiles/rebuild_cache.dir
+C:/Users/Administrator/Documents/GitHub/OOP-2/app/build/CMakeFiles/ImageFilterStudio_autogen_timestamp_deps.dir
+C:/Users/Administrator/Documents/GitHub/OOP-2/app/build/CMakeFiles/ImageFilterStudio_autogen.dir
