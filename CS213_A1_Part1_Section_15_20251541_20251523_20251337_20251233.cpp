@@ -16,72 +16,67 @@ using namespace std;
 #include <algorithm>
 #include <fstream>
 
-void oilPaintingFilter(Image& image) {
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            image(i, j, 0) = (image(i, j, 0) / 32) * 32;
-            image(i, j, 1) = (image(i, j, 1) / 32) * 32;
-            image(i, j, 2) = (image(i, j, 2) / 32) * 32;
-
-        }
-    }
-}
 
 
-void imageedges(Image& image){
-        
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            int red = image(i, j, 0);
-            int green = image(i, j, 1);
-            int blue = image(i, j, 2);
-            int average = (red + green + blue) / 3;
-            if (average < 127) {
-                image(i, j, 0) = 0;
-                image(i, j, 1) = 0;
-                image(i, j, 2) = 0;
-            } else {
-                image(i, j, 0) = 255;
-                image(i, j, 1) = 255;
-                image(i, j, 2) = 255;
-            }
-        }
-    }
-    Image newImage(image.width, image.height);
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            newImage(i, j, 0) = 255;
-            newImage(i, j, 1) = 255;
-            newImage(i, j, 2) = 255;
-        }
-    }
-    for (int i = 0; i < image.width - 1; i++) {
-        for (int j = 0; j < image.height - 1; j++) {
-            if (image(i, j, 0) != image(i + 1, j, 0) || image(i, j, 0) != image(i, j + 1, 0)) {
-                newImage(i, j, 0) = 0;
-                newImage(i, j, 1) = 0;
-                newImage(i, j, 2) = 0;
-            }
-        }
-    }
-    image = newImage;
-}
-void tvFilter(Image& image) {
-    for (int i = 0; i < image.width; i++) {
-        for (int j = 0; j < image.height; j++) {
-            if (j % 2 != 0) {
-                image(i, j, 0) = 0;
-                image(i, j, 1) = 0;
-                image(i, j, 2) = 0;
-            }
-        }
-    }
-}
+
+
 
 
 Image loadimage(Image img) {
     return img;
 }
+
+
+Image blackandwhiteimage(Image img) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            int red = img(i, j, 0);
+            int green = img(i, j, 1);
+            int blue = img(i, j, 2);
+            int average = (red + green + blue) / 3;
+            if (average < 127) {
+                img(i, j, 0) = 0;
+                img(i, j, 1) = 0;
+                img(i, j, 2) = 0;
+            } else {
+                img(i, j, 0) = 255;
+                img(i, j, 1) = 255;
+                img(i, j, 2) = 255;
+            }
+        }
+    }
+    return img;
+}
+
+
+
+Image Grey_scale(Image img) {
+
+    for (int y = 0; y < img.height;y++) {
+        for (int x = 0; x < img.width; x++) {
+            int grey = 0;
+            for (int k = 0;k < 3;k++)
+            {
+                grey += img.getPixel(x, y, k);
+
+
+            }
+            grey = grey / 3;
+            for (int k = 0;k < 3;k++)
+            {
+
+                img.setPixel(x, y, k, grey);
+
+            }
+
+
+
+        }
+    }
+    return img;
+}
+
+
 Image Invert_image(Image img) {
     for (int i = 0; i<img.width ; i++) {
         for (int j=0; j<img.height ;j++) {
@@ -138,25 +133,66 @@ Image Frame_image(Image img) {
 }
 
 
-Image blackandwhiteimage(Image img) {
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
-            int red = img(i, j, 0);
-            int green = img(i, j, 1);
-            int blue = img(i, j, 2);
-            int average = (red + green + blue) / 3;
-            if (average < 127) {
-                img(i, j, 0) = 0;
-                img(i, j, 1) = 0;
-                img(i, j, 2) = 0;
-            } else {
-                img(i, j, 0) = 255;
-                img(i, j, 1) = 255;
-                img(i, j, 2) = 255;
+
+//                                                         **                               ABDLRHAMN                        **
+
+
+
+Image Flip_Image(Image img)
+{
+
+
+    Image newiamge(img.width, img.height);
+    char flip;
+    cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
+    cout << "Your choice: ";
+    cin >> flip;
+    if (flip == 'H') {
+        for (int y = 0;y < img.height;y++) {
+            for (int x = img.width - 1; 0 <= x;x--)
+            {
+                int newX = img.width - 1 - x;
+
+                int R = img.getPixel(x, y, 0);
+                int G = img.getPixel(x, y, 1);
+                int B = img.getPixel(x, y, 2);
+
+
+                newiamge.setPixel(newX, y, 0, R);
+                newiamge.setPixel(newX, y, 1, G);
+                newiamge.setPixel(newX, y, 2, B);
+
+
             }
         }
+        return newiamge;
+
+
+
     }
-    return img;
+    else {
+        Image newiamge(img.width, img.height);
+        for (int x = 0;x < img.width;x++) {
+
+            for (int y = img.height - 1;y >= 0;y--) {
+
+                int newy = img.height - 1 - y;
+
+                int R = img.getPixel(x, y, 0);
+                int G = img.getPixel(x, y, 1);
+                int B = img.getPixel(x, y, 2);
+
+
+                newiamge.setPixel(x, newy, 0, R);
+                newiamge.setPixel(x, newy, 1, G);
+                newiamge.setPixel(x, newy, 2, B);
+
+            }
+        }
+        return newiamge;
+
+    }
+
 }
 
 Image rotateimage(Image img) {
@@ -247,6 +283,7 @@ return img;
 }
 
 
+
     Image resize(Image img, int width,int height) {
 
         Image img2(width,height);
@@ -263,36 +300,6 @@ return img;
         }
         return img2;
 }
-
-Image CropImage(Image img, int x , int y,int width,int height){
-    if (x<0) x = 0;
-    if (y<0) y = 0;
-    if (x+width > img.width) width = img.width - x;
-    if (y+height > img.height) height = img.width - y;
-    Image img2 (width,height);
-    for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height; j++){
-                for (int k=0; k<3 ; k++){
-                    img2(i, j,k) = img (i+x,j+y,k);
-                }
-            }
-        }
-        return img2;
-}
-
-
-Image Purple(Image img){
-    for (int i = 0; i < img.width;i++) {
-        for (int j = 0; j < img.height; j++) {
-            img(i,j,0) *= 0.8;
-            img(i,j,1) *= 0.65;
-            img(i,j,2) *= 0.95;
-
-        }
-    }
-    return img;
-}
-//                                                         **                               ABDLRHAMN                        **
 
 Image marge(Image img1) {
     string name;
@@ -320,6 +327,101 @@ Image marge(Image img1) {
         return result;
 }
 
+
+void imageedges(Image& image){
+        
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            int red = image(i, j, 0);
+            int green = image(i, j, 1);
+            int blue = image(i, j, 2);
+            int average = (red + green + blue) / 3;
+            if (average < 127) {
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
+            } else {
+                image(i, j, 0) = 255;
+                image(i, j, 1) = 255;
+                image(i, j, 2) = 255;
+            }
+        }
+    }
+    Image newImage(image.width, image.height);
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            newImage(i, j, 0) = 255;
+            newImage(i, j, 1) = 255;
+            newImage(i, j, 2) = 255;
+        }
+    }
+    for (int i = 0; i < image.width - 1; i++) {
+        for (int j = 0; j < image.height - 1; j++) {
+            if (image(i, j, 0) != image(i + 1, j, 0) || image(i, j, 0) != image(i, j + 1, 0)) {
+                newImage(i, j, 0) = 0;
+                newImage(i, j, 1) = 0;
+                newImage(i, j, 2) = 0;
+            }
+        }
+    }
+    image = newImage;
+}
+
+
+Image CropImage(Image img, int x , int y,int width,int height){
+    if (x<0) x = 0;
+    if (y<0) y = 0;
+    if (x+width > img.width) width = img.width - x;
+    if (y+height > img.height) height = img.width - y;
+    Image img2 (width,height);
+    for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++){
+                for (int k=0; k<3 ; k++){
+                    img2(i, j,k) = img (i+x,j+y,k);
+                }
+            }
+        }
+        return img2;
+}
+
+
+
+
+
+
+
+//                                                       **                               ABDLRHAMN                        **
+Image Blur(Image img, int radius) {
+    if (radius <= 0) {
+        cout << "Invalid radius. Must be greater than 0." << endl;
+        return img;
+    }
+    Image newImage(img.width, img.height);
+    for (int x = 0; x < img.width; x++) {
+        for (int y = 0; y < img.height; y++) {
+            int sumR = 0, sumG = 0, sumB = 0;
+            int count = 0; 
+            for (int dx = -radius; dx <= radius; dx++) {
+                for (int dy = -radius; dy <= radius; dy++) {
+                    int newX = x + dx;
+                    int newY = y + dy;
+                    if (newX >= 0 && newX < img.width && newY >= 0 && newY < img.height) {
+                        sumR += img.getPixel(newX, newY, 0);
+                        sumG += img.getPixel(newX, newY, 1);
+                        sumB += img.getPixel(newX, newY, 2);
+                        count++;
+                    }
+                }
+            }
+            newImage.setPixel(x, y, 0, sumR / count);
+            newImage.setPixel(x, y, 1, sumG / count);
+            newImage.setPixel(x, y, 2, sumB / count);
+        }
+    }
+    return newImage;
+}
+
+
 Image sunlight(Image img) {
     for (int x = 0;x < img.width;x++)
     {   
@@ -336,87 +438,43 @@ Image sunlight(Image img) {
 
 
 }
-Image Flip_Image(Image img)
-{
 
-
-    Image newiamge(img.width, img.height);
-    char flip;
-    cout << "if you want Horizontal Flip enter H and if veritcal enter V \n";
-    cout << "Your choice: ";
-    cin >> flip;
-    if (flip == 'H') {
-        for (int y = 0;y < img.height;y++) {
-            for (int x = img.width - 1; 0 <= x;x--)
-            {
-                int newX = img.width - 1 - x;
-
-                int R = img.getPixel(x, y, 0);
-                int G = img.getPixel(x, y, 1);
-                int B = img.getPixel(x, y, 2);
-
-
-                newiamge.setPixel(newX, y, 0, R);
-                newiamge.setPixel(newX, y, 1, G);
-                newiamge.setPixel(newX, y, 2, B);
-
-
+void tvFilter(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            if (j % 2 != 0) {
+                image(i, j, 0) = 0;
+                image(i, j, 1) = 0;
+                image(i, j, 2) = 0;
             }
         }
-        return newiamge;
-
-
-
     }
-    else {
-        Image newiamge(img.width, img.height);
-        for (int x = 0;x < img.width;x++) {
-
-            for (int y = img.height - 1;y >= 0;y--) {
-
-                int newy = img.height - 1 - y;
-
-                int R = img.getPixel(x, y, 0);
-                int G = img.getPixel(x, y, 1);
-                int B = img.getPixel(x, y, 2);
-
-
-                newiamge.setPixel(x, newy, 0, R);
-                newiamge.setPixel(x, newy, 1, G);
-                newiamge.setPixel(x, newy, 2, B);
-
-            }
-        }
-        return newiamge;
-
-    }
-
 }
-Image Grey_scale(Image img) {
 
-    for (int y = 0; y < img.height;y++) {
-        for (int x = 0; x < img.width; x++) {
-            int grey = 0;
-            for (int k = 0;k < 3;k++)
-            {
-                grey += img.getPixel(x, y, k);
-
-
-            }
-            grey = grey / 3;
-            for (int k = 0;k < 3;k++)
-            {
-
-                img.setPixel(x, y, k, grey);
-
-            }
-
-
+Image Purple(Image img){
+    for (int i = 0; i < img.width;i++) {
+        for (int j = 0; j < img.height; j++) {
+            img(i,j,0) *= 0.8;
+            img(i,j,1) *= 0.65;
+            img(i,j,2) *= 0.95;
 
         }
     }
     return img;
 }
+
+Image infrared(Image img) {
+    for (int i = 0; i < img.width; i++) {
+        for (int j = 0; j < img.height; j++) {
+            img(i,j,0) = 255;
+            img(i,j,1) =255- img(i,j,1);
+            img(i,j,2) =255- img(i,j,2);
+        
+    }
+}
+  return img;
+}
+
 Image skew(Image img)
 {
 
@@ -460,50 +518,15 @@ Image skew(Image img)
 
 }
 
+void oilPaintingFilter(Image& image) {
+    for (int i = 0; i < image.width; i++) {
+        for (int j = 0; j < image.height; j++) {
+            image(i, j, 0) = (image(i, j, 0) / 32) * 32;
+            image(i, j, 1) = (image(i, j, 1) / 32) * 32;
+            image(i, j, 2) = (image(i, j, 2) / 32) * 32;
 
-
-
-
-//                                                       **                               ABDLRHAMN                        **
-Image Blur(Image img, int radius) {
-    if (radius <= 0) {
-        cout << "Invalid radius. Must be greater than 0." << endl;
-        return img;
-    }
-    Image newImage(img.width, img.height);
-    for (int x = 0; x < img.width; x++) {
-        for (int y = 0; y < img.height; y++) {
-            int sumR = 0, sumG = 0, sumB = 0;
-            int count = 0; 
-            for (int dx = -radius; dx <= radius; dx++) {
-                for (int dy = -radius; dy <= radius; dy++) {
-                    int newX = x + dx;
-                    int newY = y + dy;
-                    if (newX >= 0 && newX < img.width && newY >= 0 && newY < img.height) {
-                        sumR += img.getPixel(newX, newY, 0);
-                        sumG += img.getPixel(newX, newY, 1);
-                        sumB += img.getPixel(newX, newY, 2);
-                        count++;
-                    }
-                }
-            }
-            newImage.setPixel(x, y, 0, sumR / count);
-            newImage.setPixel(x, y, 1, sumG / count);
-            newImage.setPixel(x, y, 2, sumB / count);
         }
     }
-    return newImage;
-}
-Image infrared(Image img) {
-    for (int i = 0; i < img.width; i++) {
-        for (int j = 0; j < img.height; j++) {
-            img(i,j,0) = 255;
-            img(i,j,1) =255- img(i,j,1);
-            img(i,j,2) =255- img(i,j,2);
-        
-    }
-}
-  return img;
 }
 
 
