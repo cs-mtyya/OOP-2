@@ -1481,6 +1481,7 @@ CMakeFiles/ImageFilterStudio.dir/mainwindow.cpp.obj: C:/Users/Administrator/Docu
   C:/msys64/ucrt64/include/qt6/QtGui/qvectornd.h \
   C:/msys64/ucrt64/include/qt6/QtGui/qwindowdefs.h \
   C:/msys64/ucrt64/include/qt6/QtGui/qwindowdefs_win.h \
+  C:/msys64/ucrt64/include/qt6/QtWidgets/QAbstractItemView \
   C:/msys64/ucrt64/include/qt6/QtWidgets/QApplication \
   C:/msys64/ucrt64/include/qt6/QtWidgets/QCheckBox \
   C:/msys64/ucrt64/include/qt6/QtWidgets/QComboBox \
@@ -2068,6 +2069,8 @@ C:/msys64/ucrt64/include/qt6/QtWidgets/QSplitter:
 C:/msys64/ucrt64/include/qt6/QtWidgets/QHBoxLayout:
 
 C:/msys64/ucrt64/include/qt6/QtWidgets/QFrame:
+
+C:/msys64/ucrt64/include/qt6/QtWidgets/QAbstractItemView:
 
 C:/msys64/ucrt64/include/qt6/QtGui/qvector2d.h:
 
