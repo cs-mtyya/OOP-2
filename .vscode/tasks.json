@@ -1,6 +1,20 @@
 {
     "tasks": [
         {
+            "label": "Run Pixel Studio GUI",
+            "type": "shell",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "cmake --build app/build --target ImageFilterStudio; if ($LASTEXITCODE -eq 0) { Start-Process -FilePath .\\app\\build\\PixelStudio.exe }"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",
             "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",

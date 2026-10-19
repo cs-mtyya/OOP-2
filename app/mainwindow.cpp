@@ -1,4 +1,4 @@
-z#include <QAction>
+#include <QAction>
 #include <QApplication>
 #include <QCloseEvent>
 #include <QColor>
