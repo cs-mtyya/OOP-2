@@ -1,9 +1,9 @@
 //====================================================================================
 //======================================Part 1========================================
-//Mohamed Tamer : 20251523 |||| filter: 3, 7
-//Mohamed Assem:20251337  ||| filter: 2, 6
-//Abdalrahman Mohamed Wahba: 20251541 |||| filter: 4, 8, 12, 16
-//Abdlruhman Mohamed: 20251233 |||| filter: 1, 5 , 9 , 13
+//Mohamed Tamer : 20251523 |||| ( Invert Image, Darken and Lighten Image, Crop Images, wano purple effect)
+//Mohamed Assem:20251337  ||| (Black and White, Rotate Image , Detect Image Edges, TV images)
+//Abdalrahman Mohamed Wahba: 20251541 |||| (Adding a Frame to the Picture , Resizing Images, Blur Images, infrared photography)
+//Abdlruhman Mohamed: 20251233 |||| (Grayscale Conversion, Flip Image, Merge Images, natural sunlight)
 //section: S15
 //===================================================================================
 //===================================================================================
